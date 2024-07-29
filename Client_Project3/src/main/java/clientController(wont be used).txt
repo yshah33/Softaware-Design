@@ -1,0 +1,38 @@
+import java.io.Serializable;
+
+public class clientController {
+    //// create a controller for the client. check: put client class inside the controller,
+    // GUI file with the main function calling the start *
+
+        private GuiClient guiClient;
+        private Client client;
+
+        public clientController() {
+            this.guiClient = new GuiClient();
+            this.client = new Client(this::handleServerResponse);
+        }
+
+        public void startClient(String host, int port) {
+            client.startConnection(host, port);
+            guiClient.launchGui(new String[0]);         // passing an empty string array
+        }
+
+        public void processUserInput(String input) {
+            client.send(input);         // Validate or process input if necessary
+        }
+
+        private void handleServerResponse(Serializable data) {
+            if (data instanceof String) {
+                guiClient.update((String) data);
+            }
+        }
+
+        public static void main(String[] args) {
+            clientController controller = new clientController();
+            controller.startClient("127.0.0.1", 5555);
+
+            // Launch the JavaFX application
+            GuiClient.launch(args);
+        }
+    }
+
