@@ -24,10 +24,10 @@ This Hangman Game is a full-stack word-guessing game developed using Java and Ja
 
 1. Starting the Server: Run the server with a specified port number
 ```
-$  mvn clean compile exec:java
+mvn clean compile exec:java
 ```
 
 2. For each user, run the client and enter the same port number used for the server
 ```
-$  mvn clean compile exec:java
+mvn clean compile exec:java
 ```
